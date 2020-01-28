@@ -279,6 +279,7 @@ public class ImportHandlerUtils {
                         if (cell.getCellType() == Cell.CELL_TYPE_STRING && cell.getRichStringCellValue().getString().trim().equals(name)) {
                             if (sheetName.equals(TemplatePopulateImportConstants.OFFICE_SHEET_NAME) ||
                                     sheetName.equals(TemplatePopulateImportConstants.GL_ACCOUNTS_SHEET_NAME) ||
+                                 sheetName.equals(TemplatePopulateImportConstants.PAYMENT_TYPE_ENTITY_TYPE) ||
                                     sheetName.equals(TemplatePopulateImportConstants.EXTRAS_SHEET_NAME) ||
                                     sheetName.equals(TemplatePopulateImportConstants.SHARED_PRODUCTS_SHEET_NAME)||
                                     sheetName.equals(TemplatePopulateImportConstants.ROLES_SHEET_NAME)) {
