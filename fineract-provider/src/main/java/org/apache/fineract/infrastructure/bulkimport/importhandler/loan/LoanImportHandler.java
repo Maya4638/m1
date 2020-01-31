@@ -113,7 +113,7 @@ String paymentType =  ImportHandlerUtils.readAsString(LoanConstants.DISBURSED_PA
          linkAccountId =  ImportHandlerUtils.readAsLong(LoanConstants.LINK_ACCOUNT_ID, row).toString();
 
         if (!paymentType.equals("")) {
-            paymentTypeId = ImportHandlerUtils.getIdByName(workbook.getSheet(TemplatePopulateImportConstants.PAYMENT_TYPE_ENTITY_TYPE), paymentType).toString();;
+            paymentTypeId = ImportHandlerUtils.readAsLong(LoanConstants.DISBURSED_PAYMENT_TYPE_COL, row).toString();
         }
         
         if (disbursedDate!=null) {
