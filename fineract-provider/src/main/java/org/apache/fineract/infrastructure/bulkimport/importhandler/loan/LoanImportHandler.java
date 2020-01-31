@@ -117,7 +117,8 @@ String paymentType =  ImportHandlerUtils.readAsString(LoanConstants.DISBURSED_PA
         }
         
         if (disbursedDate!=null) {
-            return DisbursementData.importInstance(disbursedDate,linkAccountId,paymentTypeId,row.getRowNum(),locale,dateFormat);
+            LoanDisbursal loanDisbursal = new LoanDisbursal(disbursedDate, paymentTypeId, row.getRowNum());
+            return DisbursementData.importInstance(linkAccountId,loanDisbursal,locale,dateFormat);
         }
         return null;
     }
@@ -402,6 +403,7 @@ String paymentType =  ImportHandlerUtils.readAsString(LoanConstants.DISBURSED_PA
 
             DisbursementData disbusalData = disbursalDates.get(rowIndex);
             String linkAccountId = disbusalData.getLinkAccountId();
+           
             GsonBuilder gsonBuilder = new GsonBuilder();
             gsonBuilder.registerTypeAdapter(LocalDate.class, new DateSerializer(dateFormat));
             if (linkAccountId != null && linkAccountId != "") {
