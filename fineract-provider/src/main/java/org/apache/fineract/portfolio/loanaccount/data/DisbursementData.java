@@ -44,10 +44,11 @@ public class DisbursementData implements Comparable<DisbursementData> {
     private String locale;
     private String note;
     private transient String linkAccountId;
+private transient String paymentTypeId;
 
-    public  static DisbursementData importInstance(LocalDate actualDisbursementDate,String linkAccountId,
+    public  static DisbursementData importInstance(LocalDate actualDisbursementDate,String linkAccountId,String paymentTypeId,
             Integer rowIndex,String locale,String dateFormat){
-        return new DisbursementData(actualDisbursementDate,linkAccountId,rowIndex,locale,dateFormat);
+        return new DisbursementData(actualDisbursementDate,linkAccountId,paymentTypeId,rowIndex,locale,dateFormat);
     }
     private DisbursementData(LocalDate actualDisbursementDate,String linkAccountId,
             Integer rowIndex,String locale,String dateFormat) {
@@ -57,6 +58,7 @@ public class DisbursementData implements Comparable<DisbursementData> {
         this.rowIndex = rowIndex;
         this.note="";
         this.linkAccountId=linkAccountId;
+        this.paymentTypeId=paymentTypeId;
         this.id=null;
         this.expectedDisbursementDate=null;
         this.principal=null;
@@ -68,6 +70,10 @@ public class DisbursementData implements Comparable<DisbursementData> {
 
     public String getLinkAccountId() {
         return linkAccountId;
+    }
+    
+    public String getPaymentTypeId() {
+        return paymentTypeId;
     }
 
     public DisbursementData(Long id, final LocalDate expectedDisbursementDate, final LocalDate actualDisbursementDate,
