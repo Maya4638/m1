@@ -103,26 +103,26 @@ public class LoanImportHandler implements ImportHandler {
             return null;
     }
 
+
     private DisbursementData readDisbursalData(Row row,String locale,String dateFormat) {
         LocalDate disbursedDate = ImportHandlerUtils.readAsDate(LoanConstants.DISBURSED_DATE_COL, row);
-String paymentType =  ImportHandlerUtils.readAsString(LoanConstants.DISBURSED_PAYMENT_TYPE_COL, row);
-
+        String paymentType =  ImportHandlerUtils.readAsString(LoanConstants.DISBURSED_PAYMENT_TYPE_COL, row);
         String linkAccountId=null;
-        String paymentTypeId = null;
         if ( ImportHandlerUtils.readAsLong(LoanConstants.LINK_ACCOUNT_ID, row)!=null)
          linkAccountId =  ImportHandlerUtils.readAsLong(LoanConstants.LINK_ACCOUNT_ID, row).toString();
 
-        if (!paymentType.equals("")) {
-            paymentTypeId = ImportHandlerUtils.readAsLong(LoanConstants.DISBURSED_PAYMENT_TYPE_COL, row).toString();
+       if (!paymentType.equals("")) {
+          String  paymentTypeId = ImportHandlerUtils.getIdByName(workbook.getSheet(TemplatePopulateImportConstants.PAYMENT_TYPE_ENTITY_TYPE), paymentType).toString();;
         }
         
         if (disbursedDate!=null) {
-            LoanDisbursal loanDisbursal = new LoanDisbursal(disbursedDate, paymentTypeId, row.getRowNum());
-            return DisbursementData.importInstance(linkAccountId,loanDisbursal,locale,dateFormat);
+            return DisbursementData.importInstance(disbursedDate,linkAccountId,paymentTypeId,row.getRowNum(),locale,dateFormat);
         }
+        
+       
         return null;
     }
-
+    
     private LoanApprovalData readLoanApproval(Row row,String locale,String dateFormat) {
         LocalDate approvedDate = ImportHandlerUtils.readAsDate(LoanConstants.APPROVED_DATE_COL, row);
         if (approvedDate!=null)
